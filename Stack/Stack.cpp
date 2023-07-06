@@ -12,7 +12,7 @@ enum Command
 struct Stack
 {
 	int container[STACK_SIZE]{};
-	int topIndex{-1};
+	int topIndex{-1}; //실수했기 때문에 복습할 것
 };
 
 void PrintInfo()
