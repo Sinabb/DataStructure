@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Monster.h"
 #include "SingleLinkedList.h"
 
 int main()
@@ -16,7 +17,7 @@ int main()
 	Monster* pResult = FindMonster(myList, "Demon");
 	if (pResult)
 	{
-		std::cout << pResult->name << std::endl;
+		std::cout << pResult->name<<"ÀÖÀ½" << std::endl;
 	}
 	else
 	{

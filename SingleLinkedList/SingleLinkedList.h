@@ -8,20 +8,20 @@ struct MonsterList
 };
 
 // Create
-void CreateMonster(Monster& list, const char* name, const int hp);
+Monster* CreateMonster(MonsterList& list, const char* name, const int hp);
 
 // Count
-int GetMonsterCount(const Monster& list);
+int GetMonsterCount(const MonsterList& list);
 
 // Print
-void PrintMonster(const Monster& list);
+void PrintMonster(const MonsterList& list);
 void PrintMonsterR(const Monster* p);
 
 // Search
-Monster* FindMonster(const Monster& list, const char* name);
+Monster* FindMonster(const MonsterList& list, const char* name);
 
 // Delete All
-void DeleteAll(const Monster& list);
+void DeleteAll(MonsterList& list);
 
 // Delete Element
-bool DeleteMonster(const Monster& list, const char* name);
+bool DeleteMonster(const MonsterList& list, const char* name);

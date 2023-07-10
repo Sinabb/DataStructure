@@ -1,13 +1,13 @@
 #include <iostream>
 #include "SingleLinkedList.h"
 
-void CreateMonster(Monster& list, const char* name, const int hp)
+Monster* CreateMonster(MonsterList& list, const char* name, const int hp)
 {
 	Monster* element = new Monster;
-	strcpy_s(elemnet->name, NAME_LENGTH, name);
+	strcpy_s(element->name, NAME_LENGTH, name);
 	element->hp = hp;
 
-	if (list.pNext == nullptr)
+	if (list.pTail == nullptr)
 	{
 		list.pHead = element;
 	}
@@ -20,7 +20,7 @@ void CreateMonster(Monster& list, const char* name, const int hp)
 	return element;
 }
 
-int GetMonsterCount(const Monster& list)
+int GetMonsterCount(const MonsterList& list)
 {
 	Monster* p = list.pHead;
 	int count{};
@@ -33,7 +33,7 @@ int GetMonsterCount(const Monster& list)
 
 }
 
-void PrintMonster(const Monster& list)
+void PrintMonster(const MonsterList& list)
 {
 	Monster* p = list.pHead;
 	while (p)
@@ -54,14 +54,14 @@ void PrintMonsterR(const Monster* p)
 	PrintMonsterR(p->pNext);
 }
 
-Monster* FindMonster(const Monster& list, const char* name)
+Monster* FindMonster(const MonsterList& list, const char* name)
 {
 
-	monster* p = list.pNext;
+	Monster* p = list.pHead;
 
 	while (p)
 	{
-		if (strcmp(p->name == name) == 0)
+		if (strcmp(p->name, name) == 0)
 		{
 			return p;
 		}
@@ -70,9 +70,9 @@ Monster* FindMonster(const Monster& list, const char* name)
 	return nullptr;
 }
 
-void DeleteAll(const Monster& list)
+void DeleteAll(MonsterList& list)
 {
-	Monster* p = list.phead;
+	Monster* p = list.pHead;
 
 	Monster* pNext{};
 
@@ -80,13 +80,12 @@ void DeleteAll(const Monster& list)
 	{
 		pNext = p->pNext;
 		delete p;
-		p = p->pNext;
+		p = pNext;
 	}
-
-	list.pNext = list.pNext = nullptr;
+	list.pHead = list.pTail = nullptr;
 }
 
-bool DeleteMonster(const Monster& list, const char* name)
+bool DeleteMonster(const MonsterList& list, const char* name)
 {
 	return false;
 }
