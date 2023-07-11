@@ -1,6 +1,7 @@
 #include <iostream>
-#include "SingleLinkedList.h"
+#include "DoubleLinkedList.h"
 
+// Create
 Monster* CreateMonster(MonsterList& list, const char* name, const int hp)
 {
 	Monster* element = new Monster;
@@ -10,16 +11,19 @@ Monster* CreateMonster(MonsterList& list, const char* name, const int hp)
 	if (list.pTail == nullptr)
 	{
 		list.pHead = element;
+		list.pTail = element;
 	}
 	else
 	{
 		list.pTail->pNext = element;
+		element->pPrevious = list.pTail;
 	}
 	list.pTail = element;
 
 	return element;
 }
 
+// Count
 int GetMonsterCount(const MonsterList& list)
 {
 	Monster* p = list.pHead;
@@ -30,20 +34,18 @@ int GetMonsterCount(const MonsterList& list)
 		p = p->pNext;
 	}
 	return count;
-
 }
 
+// Print
 void PrintMonster(const MonsterList& list)
 {
 	Monster* p = list.pHead;
 	while (p)
 	{
-		std::cout << p->name << "," << p ->hp  << std::endl;
+		std::cout << p->name << "," << p->hp << std::endl;
 		p = p->pNext;
 	}
-
 }
-
 void PrintMonsterR(const Monster* p)
 {
 	if (p == nullptr)
@@ -54,11 +56,10 @@ void PrintMonsterR(const Monster* p)
 	PrintMonsterR(p->pNext);
 }
 
+// Search
 Monster* FindMonster(const MonsterList& list, const char* name)
 {
-
 	Monster* p = list.pHead;
-
 	while (p)
 	{
 		if (strcmp(p->name, name) == 0)
@@ -70,13 +71,13 @@ Monster* FindMonster(const MonsterList& list, const char* name)
 	return nullptr;
 }
 
+// Delete All
 void DeleteAll(MonsterList& list)
 {
 	Monster* p = list.pHead;
-
 	Monster* pNext{};
 
-	while (p != nullptr)
+	while (p !=nullptr)
 	{
 		pNext = p->pNext;
 		delete p;
@@ -85,25 +86,23 @@ void DeleteAll(MonsterList& list)
 	list.pHead = list.pTail = nullptr;
 }
 
+// Delete Element
 bool DeleteMonster(MonsterList& list, const char* name)
 {
-
 	Monster* pElement = list.pHead;
 	Monster* pPrevious{};
-	
+
 	while (pElement)
 	{
-		if (strcmp(pElement->name, name) == 0)
+		if (strcmp(pElement->name, name) == 0) 
 		{
 			break;
 		}
-
 		pPrevious = pElement;
 		pElement = pElement->pNext;
-
 	}
 
-	if (!pElement)// 널이 아니다 = 널이다
+	if (!pElement)
 	{
 		return false;
 	}
@@ -117,16 +116,25 @@ bool DeleteMonster(MonsterList& list, const char* name)
 	{
 		list.pHead = pElement->pNext;
 	}
-
-	else if (pElement == nullptr)
+	else if (pPrevious == list.pHead)
 	{
-		list.pTail = pPrevious;
-		pPrevious->pNext = nullptr;
+		list.pHead->pPrevious = nullptr;
 	}
 
+	else if (pElement == list.pHead)
+	{
+		list.pHead = pElement->pNext;
+		list.pHead->pPrevious = nullptr;
+	}
+	else if (pElement == list.pTail)
+	{
+		list.pTail = pPrevious;
+		list.pTail->pNext = nullptr;
+	}
 	else
 	{
 		pPrevious->pNext = pElement->pNext;
+		pElement->pNext = pPrevious;
 	}
 	delete pElement;
 	return true;

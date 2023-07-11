@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Monster.h"
-#include "SingleLinkedList.h"
+#include "DoubleLinkedList.h"
 
 int main()
 {
@@ -11,21 +11,19 @@ int main()
 	CreateMonster(myList, "Slime", 10);
 
 	PrintMonster(myList);
-	//PrintMonsterR(myList.pHead);
+	PrintMonsterR(myList.pHead);
 	std::cout << GetMonsterCount(myList) << std::endl;
-	
+
 	Monster* pResult = FindMonster(myList, "Demon");
 	if (pResult)
 	{
-		std::cout << pResult->name<<"있음" << std::endl;
+		std::cout << pResult->name << "있음" << std::endl;
 	}
 	else
 	{
 		std::cout << "못찾음" << std::endl;
 	}
-
-	DeleteMonster(myList,"Demon");
+	DeleteMonster(myList, "Demon");
 	PrintMonster(myList);
-
 	DeleteAll(myList);
 }
