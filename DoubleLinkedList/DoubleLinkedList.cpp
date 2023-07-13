@@ -116,10 +116,6 @@ bool DeleteMonster(MonsterList& list, const char* name)
 	{
 		list.pHead = pElement->pNext;
 	}
-	else if (pPrevious == list.pHead)
-	{
-		list.pHead->pPrevious = nullptr;
-	}
 
 	else if (pElement == list.pHead)
 	{
